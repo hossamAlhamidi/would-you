@@ -7,11 +7,11 @@ import Home from "./components/home"
 import NewPull from "./components/newPull"
 import Leader from "./components/leaderBoard"
 import Board from "./components/board"
-import { Route , BrowserRouter as Router , Switch ,Link} from 'react-router-dom';
+import { Route , BrowserRouter as Router , Switch ,Link ,Redirect} from 'react-router-dom';
 import * as UsersAPI from './_DATA'
 import {store} from "./index"
 import * as Actions from "./actions/actions"
-
+import {isNull} from "lodash"
  class App extends Component {
   constructor(props){
     super(props)
@@ -41,37 +41,40 @@ import * as Actions from "./actions/actions"
   
   
   render() {
-    console.log(this.props.auth,"auth from app")
+    
     return (
       
       <Router>
         
       <div>
-      
+      <Navbar/>
        <Switch>
          
-         
-         
-       <Route path="/home" >
-       <Navbar/>
-        <Home/>
-       </Route>
-
-       <Route path="/pull">
-       <Navbar/>
-         <NewPull/>
-
-       </Route>
-
-       <Route path="/board">
-       <Navbar/>
-         <Leader/>
-
-       </Route>
-       <Route path="/">
+       <Route path="/" exact>
          <Sign  />
        </Route>
-       </Switch>
+
+        
+       <Route path="/home" >
+         {
+       !isNull(this.props.auth)?
+        <Home/> : <Redirect to="/"/> }
+        </Route>
+        
+
+       <Route path="/pull">
+      { !isNull(this.props.auth)?
+         <NewPull/> :
+           <Redirect to="/"/>}
+       </Route>  
+
+       <Route path="/board">
+       { !isNull(this.props.auth)?
+         <Leader/> : <Redirect to="/"/>}
+
+       </Route>
+       
+       </Switch> 
       </div>
       </Router>
     )
@@ -81,4 +84,4 @@ const mapStateToProps = state =>{
   return { auth:state.authReducer}
 }
 
-export default App
+export default connect(mapStateToProps)(App)

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import {Link} from "react-router-dom"
-import { Provider, connect } from 'react-redux'
+import { Route , BrowserRouter as Router , Switch ,Link ,Redirect} from 'react-router-dom';
+import {isNull} from "lodash"
+import { connect } from 'react-redux'
 import Store from "../index"
 import * as Actions from "../actions/actions"
 import * as UsersAPI from '../_DATA'
@@ -11,12 +12,19 @@ import {store} from "../index.js"
  constructor(props){
      super(props)
      this.state={
-         input:""
+         input:"",
+         user: null
      }
  }
- handleChange = async (event)=>{
-    await this.setState({input:event.target.value})
-    store.dispatch(Actions.loginUser(this.props.users[this.state.input]))
+ handleSelect = (event) => {
+    let userTarget = this.props.users.filter(user=>{return user.id == event.target.value})
+    this.setState({
+        user: userTarget
+    })
+ }
+ handleLogIn = ()=>{
+    
+    store.dispatch(Actions.authUser(this.state.user))
  }
 
 //  handleLogIn = () => {
@@ -26,7 +34,8 @@ import {store} from "../index.js"
        // console.log(this.props.us,"user")
       //  this.props.users.map(user=>console.log(user))
       console.log(this.props.users,"user from sign")
-      console.log(this.props.auth,"auth from sign")
+      console.log( this.props.auth,"auth from sign")
+      console.log(isNull(!this.props.auth),"isnull")
       
       //console.log( Object.keys(this.props.us))
      // Object.keys(this.props.us).map(user=>console.log(user))
@@ -60,21 +69,27 @@ import {store} from "../index.js"
                 <div>Please sign in to continue</div>
                 </header>
                 <div className="row ">
-                <img src="	https://reactnd-would-you-rather.netlify.app/images/avatars/animals.png" className="img"></img>
+                <img src="https://reactnd-would-you-rather.netlify.app/images/avatars/animals.png" className="img"></img>
                  
                 </div>
                 <h3>Sign in</h3>
                 <form>
-                {/* <select class="custom-select">
-                 <option selected>Open this select menu</option>
-                <option value="sarahedo">One</option>
-                 <option value="2">Two</option>
-                 <option value="3">Three</option>
-        </select> */}
-        <input placeholder="enter user name" type="text" value={this.state.input} onChange={this.handleChange}/>
+                <select className="custom-select" onChange={this.handleSelect} >
+                    <option defaultValue disabled>Open this select menu</option>
+                    {/* <option value="null" hidden ></option> */}
+                   {this.props.users.map(user => (<option key={user.id} value={user.id}>{user.name}</option>))}
+                </select> 
+        {/* <input placeholder="enter user name" type="text" value={this.state.input} onChange={this.handleChange}/> */}
        
        {/* <Link to="/home"> <button type="button" class="btn btn-success">Login</button></Link> */}
-       <Link to="/home" className="btn btn-success" > Login</Link>
+       {/* {!isNull(this.props.auth)?  
+        <Link  to="/home" className="btn btn-success " > Login</Link>
+      
+          :  <Link  to="/home" className="btn btn-success disabled  " > Login</Link>
+
+       } */}
+
+       <Link className="btn btn-success" onClick={this.handleLogIn} to="/home">Login</Link>
        
       
         </form>
@@ -90,8 +105,10 @@ import {store} from "../index.js"
     }
 }
 
-const mapStateToProps = state =>{
-    return {users:state.userReducer , auth:state.authReducer.authenticated}
+
+const mapStateToProps = ({userReducer,authReducer}) => {
+        
+    return {users: Object.values(userReducer) , auth:authReducer}
 }
   
 

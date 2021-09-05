@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-
-export default class board extends Component {
+import { connect } from 'react-redux'
+  class board extends Component {
     render() {
+      
         return (
             <div className="container mx-auto border border-secondary">
                 
@@ -22,3 +23,9 @@ export default class board extends Component {
         )
     }
 }
+
+const mapStateToProps = ({userReducer,authReducer}) => {
+        
+    return { auth:authReducer}
+}
+export default connect(mapStateToProps)(board)

@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import Board from "../components/board"
-export default class leaderBoard extends Component {
+import { connect } from 'react-redux'
+  class leaderBoard extends Component {
+  
     render() {
+        
         return (
             <div> <Board/>  <Board/>  <Board/></div>
           
@@ -9,3 +12,11 @@ export default class leaderBoard extends Component {
         )
     }
 }
+
+
+const mapStateToProps = ({userReducer,authReducer}) => {
+        
+    return { auth:authReducer}
+}
+
+export default connect(mapStateToProps)(leaderBoard)
