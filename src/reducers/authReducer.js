@@ -8,9 +8,7 @@ let users = []
 let authUser = null;
   
   export default function authReducer(state = authUser , action)  {
-    try{
-    console.log(action.user[0].id,"action")}
-    catch(err){console.log(err)}
+    
     switch (action.type) {
       
       case Actions.AUTH_USER:
