@@ -4,20 +4,19 @@ import * as UsersAPI from '../_DATA'
 import { Route , BrowserRouter as Router , Switch ,Link ,Redirect} from 'react-router-dom';
  class card extends Component {
 
-  handleAnswerPull = (event)=>{
-    // <Redirect to="/"/>
-  }
-
-  componentDidMount(){
-   // UsersAPI._getQuestions().then(res=>console.log(res,"from card"))
-  }
+ 
     render() {
-      console.log(this.props.questions,"questions from card")
+       console.log(this.props.questions[0],"questions from card")
+      // console.log(this.props.user.authUser[0].id,"user id from card")
+      // console.log(this.props.user,"user from card")
+     
         return (
         
             <div >
                {
-                this.props.questions.map((question)=> {return (<div key={question.id} className="card mb-5">
+                 this.props.questions.filter(question=> !question.optionOne.votes.includes(this.props.user.authUser[0].id)&&
+               ! question.optionTwo.votes.includes(this.props.user.authUser[0].id))
+                .map((question)=> {return (<div key={question.id} className="card mb-5">
                  <h6 className="card-header ">{question.author} asks:</h6>
   <div className="card-body">
     <h4 className="card-title">Would you Rather</h4>
@@ -42,7 +41,7 @@ import { Route , BrowserRouter as Router , Switch ,Link ,Redirect} from 'react-r
 
 const mapStateToProps = (state)=>{
  return {
-    questions:Object.values(state.questionsReducer)
+    questions:Object.values(state.questionsReducer),user:state.authReducer
  }
 }
 export default connect(mapStateToProps)(card)

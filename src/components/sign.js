@@ -23,7 +23,7 @@ import {store} from "../index.js"
     })
     
     let btn = document.querySelector(".btn")
-    btn.classList.toggle("disabled")
+    btn.classList.remove("disabled")
  }
  handleLogIn = (event)=>{
     

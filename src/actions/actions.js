@@ -4,7 +4,7 @@ export const ADD_Q = "ADD_Q"
 export const DELETE_Q = "DELETE_Q"
 export const GETUSERS = "GETUSERS"
 export const REC_Q = "REC_Q"
-export const SUBMIT_Q = "SUBMIT_Q"
+export const CREATE_Q = "CREATE_Q"
 
 
   export const authUser = (user) => {
@@ -37,8 +37,9 @@ export const receiveQuestions = (questions)=>{
   }
 }
 
-export const submitQuestions = ()=>{
+export const createQuestions = (questions)=>{
   return {
-    type:SUBMIT_Q
+    type:CREATE_Q,
+    questions
   }
 }
