@@ -22,7 +22,7 @@ import * as Actions from "../actions/actions";
         let btn = document.querySelector(".answer")
         btn.classList.remove("disabled")
      await   this.setState({
-          id:event.target.value,
+          id:event.target.value, //save radio option value == question id 
           option:event.target.id
         })
         

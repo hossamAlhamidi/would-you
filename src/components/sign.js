@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
 import { Route , BrowserRouter as Router , Switch ,Link ,Redirect} from 'react-router-dom';
-import {isNull} from "lodash"
 import { connect } from 'react-redux'
-import Store from "../index"
 import * as Actions from "../actions/actions"
-import * as UsersAPI from '../_DATA'
-import authReducer from '../reducers/authReducer';
-import userReducer from '../reducers/userReducer';
+
 import {store} from "../index.js"
  class sign extends Component {
  constructor(props){
@@ -55,15 +51,7 @@ import {store} from "../index.js"
                     <option value="null" hidden ></option>
                    {this.props.users.map(user => (<option  key={user.id} value={user.id}>{user.name}</option>))}
                 </select> 
-        {/* <input placeholder="enter user name" type="text" value={this.state.input} onChange={this.handleChange}/> */}
        
-       {/* <Link to="/home"> <button type="button" class="btn btn-success">Login</button></Link> */}
-       {/* {!isNull(this.props.auth)?  
-        <Link  to="/home" className="btn btn-success " > Login</Link>
-      
-          :  <Link  to="/home" className="btn btn-success disabled  " > Login</Link>
-
-       } */}
 
        <Link className="btn btn-success disabled" onClick={this.handleLogIn} to="/home">Login</Link>
        

@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
             <div className="container mx-auto border border-secondary">
                 
             <div className="row">
-        <div className="col-4 ">img</div>
+        <div className="col-4 ">img222</div>
         <div className="col-4">Name
         <p>answered question:</p>
         <p>unanswered question:</p>

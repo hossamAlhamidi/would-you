@@ -23,12 +23,7 @@ import {isNull} from "lodash"
   componentDidMount(){
     UsersAPI._getUsers().then(res=>{
      
-      // for(let val in res){
-      //   for(let val2 in res[val]){
-      //     if(val2=="id")
-      //     store.dispatch(Actions.loginUser(res[val]["id"]))
-      //   }
-      // }
+      
       store.dispatch(Actions.getUsers(res))
     
      
@@ -47,7 +42,9 @@ import {isNull} from "lodash"
               <Router>
                 
               <div>
-              <Navbar/>
+                { !isNull(this.props.auth)?
+              <Navbar/>:""
+              }
               <Switch>
                 
               <Route path="/" exact>
@@ -107,7 +104,7 @@ import {isNull} from "lodash"
               
               } */}
               <Route > <SubmitAnswerPull/></Route>
-                 
+              
               
               </Switch> 
               </div>

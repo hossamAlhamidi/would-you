@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as UsersAPI from '../_DATA'
-import { Route , BrowserRouter as Router , Switch ,Link ,Redirect} from 'react-router-dom';
+import {  BrowserRouter as Router  ,Link ,Redirect} from 'react-router-dom';
  class card extends Component {
 
  

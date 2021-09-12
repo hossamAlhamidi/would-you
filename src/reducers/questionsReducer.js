@@ -1,6 +1,8 @@
 
 import * as Actions from "../actions/actions";
 export default function(state={},action){
+    
+   
   switch(action.type){
       case Actions.REC_Q:{
         
@@ -8,8 +10,11 @@ export default function(state={},action){
       }
 
       case Actions.CREATE_Q:{
-          return {...state , questions:action.questions}
+        
+         return {...state , questions:action.questions}
+         
       }
+         
       default:return state;
   }
 }

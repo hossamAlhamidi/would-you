@@ -7,6 +7,8 @@ import { createStore, combineReducers } from 'redux'
 import authReducer from './reducers/authReducer';
 import userReducer from "./reducers/userReducer"
 import questionsReducer from "./reducers/questionsReducer"
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/js/bootstrap.bundle.min.js"
 
 // DevTool
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -15,7 +17,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 const combined = combineReducers({userReducer,authReducer,questionsReducer})
 export const store = createStore(combined, composeWithDevTools());
 
-//store.dispatch(Actions.loginUser(0))
+
 
 ReactDOM.render(
   <Provider store={store}> <App /></Provider>

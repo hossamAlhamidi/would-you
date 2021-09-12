@@ -40,6 +40,6 @@ export const receiveQuestions = (questions)=>{
 export const createQuestions = (questions)=>{
   return {
     type:CREATE_Q,
-    questions
+    questions:questions
   }
 }
